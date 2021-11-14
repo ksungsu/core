@@ -4,6 +4,10 @@
 
 * Object-Oriented Design
 * On Pure Java
+* create Interface and 구현체 분리
+* OCP, DIP
+* SOLID
+* Create Junit Test 
 
 
 
