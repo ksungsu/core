@@ -3,6 +3,8 @@ package hello.core.member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MemberServiceTest {
 
     MemberService memberService = new MemberServiceImpl();
@@ -22,5 +24,11 @@ public class MemberServiceTest {
 
         //then
         Assertions.assertThat(member).isEqualTo(findMember);
+
+        assertEquals(member.getName(),"memberA");
+        assertEquals(member.getGrade(), Grade.VIP);
+//        org.junit.jupiter.api.Assertions.assertEquals(member.getName(),"memberA");
+        System.out.println("member Name = " + member.getName());
+        System.out.println("Grade = " + Grade.VIP);
     }
 }
