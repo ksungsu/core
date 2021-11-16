@@ -24,16 +24,16 @@ public class AppConfig {
 
     @Bean   //spring container에 등록
     public MemberService memberService(){
-        return new MemberServiceImpl(memberRepositiry());
+        return new MemberServiceImpl(memberRepository());
     }
     @Bean
-    public MemberRepository memberRepositiry() {
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService(){
-        return new OrderServiceImpl(memberRepositiry(), discountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
