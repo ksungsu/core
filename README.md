@@ -84,5 +84,11 @@
 
 </br>
 
+* BeanFactory or SpringContainer
+ * ApplicationContext
+* Using XML ApplicationContext  and Tested
+
+</br>
+
 ### MyBlog😊😊
 https://hardkeepgoing.tistory.com/
