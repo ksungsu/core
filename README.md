@@ -1,6 +1,6 @@
 # core
 
-## TIL(2021.11.14)(Today 24)📌
+## TIL(2021.11.14)(24th day)📌
 
 * Object-Oriented Design
 * On Pure Java
@@ -11,7 +11,7 @@
 
 </br>
 
-## TIL(2021.11.15)(Today 25) ✔
+## TIL(2021.11.15)(25th day) ✔
 
 * 변화에 대응하는 객체지향 설계(애자일 실행 관례)
   * interface와 구현체의 분리 
@@ -73,148 +73,14 @@
     * spring DI
     * @Bean, @Configuration
 
-### DIP 위반 예시 📌
-
-```java
-//OrderServiceImpl
-public class OrderServiceImpl implements OrderService{
-
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-     private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-   // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
-
-```
-* inteface인 DiscountPolicy 뿐만 아니라 구현체인 FixDiscountPolicy()에도 의존하고 있다.
-  * 이유 : FixDiscountPolicy에서 RateDiscountPolicy로 변경하려면 OrderServiceImpl를 변경해야하기 때문
-  * DIP, OCP 위반
-  * 해결방법 : client가 interface에만 의존할 수 있도록 설정해주면됨
- 
-</br>
- 
-### DIP 위반 해결방안 📌 
-
-* 배우, 기획자, 역할 등  관심사를 분리
-* AppConfig
-  * 애플리케이션 전체 동작을 config(설정)하기 위해, "구현 객체를 생성"하고, "연결"하는 책임을 가지는 별도의 설정 클래스를 만들자.
-
-```java
-    //MemberServiceImpl
-    public class MemberServiceImpl implements MemberService {
-    private final MemberRepository memberRepository;
-
-    public MemberServiceImpl(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-}
-
-```
 </br>
 
-```java
-    //OrderServiceImpl
-    public class OrderServiceImpl implements OrderService{
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
-
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
-}
-```
-
-</br>
-
-```java
-  //AppConfig
-  public class AppConfig {
-
-    public MemberService memberService(){
-        return new MemberServiceImpl(new MemoryMemberRepository());
-    }
-    
-    public OrderService orderService(){
-    return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
-    }
-}
-```
-
-```java
-// MemberApp
-public class MemberApp {
-
-    public static void main(String[] args) {
-       
-        /**
-         * AppConfig 생성(의존 관계 결정)
-         */
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
-//        MemberService memberService = new MemberServiceImpl();
-
-           }
-}
-```
-
-</br>
-
-```java
-//OrderApp
-public class OrderApp {
-
-    public static void main(String[] args) {
-        
-        /**
-         * AppConfig 생성(의존 관계 결정)
-         */
-        AppConfig appConfig = new AppConfig();
-        appConfig.orderService();
-        
-//        MemberService memberService = new MemberServiceImpl();
-//        OrderService orderService = new OrderServiceImpl();
-        }
-}
-```
-* 어플리케이션에서 직접 구현체에 접근(의존)하지 않고, AppConfig에 접근하도록 설정
-
-</br>
-
-* 관심사 분리
-  * 각자 맡은 역할에만 충실하도록
-  * MemberServiceImple은 구현체에 직접 접근 x, interface만 접근, AppConfig로 설정
-  * Dependency Injection(DI)
-
-</br>
-
-### AppConfig Refactoring 📌
-
-```java
-//AppConfig
-public class AppConfig {
-
-    public MemberService memberService(){
-        return new MemberServiceImpl(memberRepositiry());
-    }
-
-    private MemberRepository memberRepositiry() {
-        return new MemoryMemberRepository();
-    }
-
-    public OrderService orderService(){
-        return new OrderServiceImpl(memberRepositiry(), discountPolicy());
-    }
-
-    public DiscountPolicy discountPolicy(){
-        return new FixDiscountPolicy();
-    }
-}
-```
-* refactoring을 통해 역할을 명확하게 구분
-  * 중복 없는 구현체
-  * 역할과 구현체의 명확한 구분, 빠르게 파악 가능. 
-
-</br>
-
+## TIL(2021.11.16)(26th day) ✔
+* spring container
+ * find spring container all of bean
+ * Find bean using role and definition.
+ * Find same type bean(getBeansOfType)
+ * 부모 타입 조회 = 자식 타입도 함께 조회.
 
 </br>
 
