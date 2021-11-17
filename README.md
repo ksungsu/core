@@ -90,5 +90,61 @@
 
 </br>
 
+# TIL(2021.11.17)(27th day)✔
+
+</br>
+
+## Spring Container 🎯 
+* BeanDefinition (= interface)이 아래 데이터들(metadata)의 추상화 역할을 해서 읽어드린다. 
+	* AppConfig.class (= 구현체)
+    * appConfig.xml
+    * appConfig.xxx
+    
+</br>
+    
+## Singleton Pattern🎯
+* pure java는 웹(클라이언트)에서 요청이 올때마다 새로운 객체를 생성한다. 이는 Memory waste를 초래한다 
+	* 해결방안 : Singleton pattern을 사용한다. 
+    	* Singleton은 하나의 객체만 생성하고 공유하도록 설계가 가능하다.
+    
+### Problems of Singleton Pattern 
+* DIP 위반
+* 테스트의 어려움
+* 복수의 생성자 생성의 어려움(다형성을 크게 떨어트림)
+
+</br>
+
+## SpringContainer(SingletonContainer) 🎯
+* object들을 모두 singleton화 시켜줌.(전부터 궁금했던 순수 자바코드보다 spring이 더 좋은 이유를 알게됨.)
+* singleton pattern의 단점을 해결
+
+### Singleton 방식의 주의점
+* 같은 객체를 공유하기 때문에 값이 유지(stateful)하게 설계하면 안된다.(무상태로 설계해야한다.)
+	* 지역변수, 파라미터, ThreadLocal 등을 사용해야한다.
+    * 필드 공유 값을 설정하면 큰 장애가 발생할 수 있다.
+
+</br>
+
+## @Configuration🎯
+* 바이트코드 조작 라이브러리로 AppConfig를 AppConfig@CGLIB 클래스(AppConfig의 자식파일)로 치환(?)해준다.
+	* 싱글톤 성질을 보장시켜준다.
+    * 스프링 컨테이너 적재 유무에 따라 자동으로 적재해주고 반환해준다.
+    * Annotation Configuration을 선언해주지 않으면 싱글톤 성질이 깨지고, AppConfig 내에 따로 객체를 생성해서 의존성 주입을 해줘야한다
+		* memberRepository와 같은..
+
+</br>
+
+## 궁금한점 📌
+* logic 사용의 이유
+* singleton이 DIP를 위반하는 이유
+	* singleton에서 선언한 getInstance()를 AppConfig에 적용시켜야하는데 이로 인해, interface에 변경을 이르킨다. 
+    * 즉, DIP를 위반한다.
+* 다형성이란? 
+	* 오버라이딩을 통한 설정 바꾸기, 
+    * ex) 오버워치라는 인터페이스와 캐릭터라는 구현체로 분리, 캐릭터마다 가진 스킬들이 다름 이를 오버라이딩으로 변경함.
+
+
+</br>
+
 ### MyBlog😊😊
 https://hardkeepgoing.tistory.com/
