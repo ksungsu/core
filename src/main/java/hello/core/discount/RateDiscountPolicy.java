@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  * 정률 Discount 구현체 생성
  */
 @Component
+
 public class RateDiscountPolicy implements DiscountPolicy{
 
     private int discountPercent = 10;

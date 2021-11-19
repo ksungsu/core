@@ -6,6 +6,7 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,21 +17,13 @@ import org.springframework.stereotype.Component;
  * 역할과 구현을 잘 분리함.
  */
 @Component
+@RequiredArgsConstructor // final 변수 생성자를 자동 생성
 public class OrderServiceImpl implements OrderService{
 
-    /**
-     * 관심사 분리(생성자 주입)(DI)
-     */
-    //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
