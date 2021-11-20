@@ -209,5 +209,47 @@
 
 </br>
 
+## TIL(30th day)(2021.11.20)✔
+
+## 조회한 빈이 모두 필요한 경우 📌
+- 	List, Map
+	-	ex) 할인의 종류 rate or fixDiscountPolicy 둘다 필요한경우
+    
+</br>
+
+## 실무에서의 자동 그리고 수동 📌
+-	스프링빈은 많은 기능을 자동으로 지원한다. 이를 적극적으로 활용하는것이 좋다.
+	-	업무 로직 빈과 기술 지원 빈이 있다.
+    	-	업무 로직 빈에는 '자동'이, 기술 지원 빈에는 '수동'이 유지보수에 유리하다.
+        -	그 이유는, 기술 지원은 광범위하게 적용되고 그 수가 적어서 오류가 일어나는 부분을 확실하게 찾을 수 있도록 수동으로 등록해주는것이 유리하기 때문이다.
+        -	반면에, 업무 로직 빈(비즈니스 로직)에서도 '수동' 선언이 좋을 때가 있다.
+		-	ex) '다형성'을 사용할 때,(List, Map) 또는 여러 빈을 사용해야할때
+		-	왜? ) 다른 사람이 내 코드를 봤을 때 한눈에 이해할 수 있도록하기 위해
+
+</br>
+
+## 궁금한점 📌
+-   스프링빈에서 얘기하는 타입의 정확한 의미는?
+	- java 에서는 primitive type(기본 타입)과 reference type(참조 타입)을 지원한다.
+    	- primitive type은 정수, 실수, 문자, 논리 리터럴을 저장하는 타입
+        - reference type은 객체의 번지를 참조하는 타입으로, 배열, 열거, 클래스, 인터페이스 타입
+        
+-	Map<k,v>에서 key 값에 String이 들어가는 이유는?
+	-	 springbean에서 호출할 때 타입을 앞글자가 소문자인 String으로 받아오기 때문에 (ex) discountPolicy)
+    
+-	isInstanceOf의 정확한 의미는?
+	-	ex) assertThat(discountService).isInstanceOf(DiscountService);
+    	-	discountService는 DiscountService 타입으로 받을 수 있는지를 묻는것.
+        -	즉, DiscountService라는 interface안에 discountService 구현체가 있는지 물어보는것.
+
+-	rateDiscountPolicy.class에 @Primary annotation을 추가해서 중복 빈 조회 에러를 방지했다. 
+	-	fixDiscountPolicy를 선언해줘서 할인가가 1000원으로 고정되게 설정했다. 
+    -	RateDiscountPolicy가 @Primary여서 우선원을 갖게되는데, 이때 내가 원하는 결과가 나오지 않을까했다.
+    	-	 하지만, 결과는 1000원의 고정된 할인가를 반영했다. 하지만 한번이라도 정률 할인 방식이 적용되면 그건 문제가 되기에
+        	의문이다. 내가 설정한 정액할인가가 모든 케이스에 적용이될까?  
+
+
+</br>
+
 ### MyBlog😊😊
 https://hardkeepgoing.tistory.com/
